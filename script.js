@@ -19,10 +19,17 @@ const HashMap = () => {
     return hashMapArray[hash(key)][1];
   };
 
-  return { hash, set, get, hashMapArray };
+  const has = (key) => {
+    if (hashMapArray[hash(key)] !== undefined) return true;
+    else return false;
+  };
+
+  return { hash, set, get, has, hashMapArray };
 };
 
 const exampleHashMap = HashMap();
 console.log(exampleHashMap.hash("fred"));
 exampleHashMap.set("name", "fred");
 console.log(exampleHashMap.get("name"));
+console.log(exampleHashMap.has("name"));
+console.log(exampleHashMap.has("height"));
