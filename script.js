@@ -1,4 +1,5 @@
 const HashMap = () => {
+  let hashMapArray = [];
   const hash = (key) => {
     let hashCode = 0;
 
@@ -9,7 +10,19 @@ const HashMap = () => {
     return hashCode;
   };
 
-  const set = (key, value) => {};
+  const set = (key, value) => {
+    const hashedKey = hash(key);
+    hashMapArray[hashedKey] = [key, value];
+  };
 
-  return { hash };
+  const get = (key) => {
+    return hashMapArray[hash(key)][1];
+  };
+
+  return { hash, set, get, hashMapArray };
 };
+
+const exampleHashMap = HashMap();
+console.log(exampleHashMap.hash("fred"));
+exampleHashMap.set("name", "fred");
+console.log(exampleHashMap.get("name"));
