@@ -44,19 +44,21 @@ const HashMap = () => {
     }
   };
 
-  const get = (key) => {
+  const get = function (key) {
     // returns the value that is assigned to the given key
+    if (!this.has(key)) return null;
     const bucket = hashMapArray[hash(key)];
     const keyIndex = bucket.findKey(key);
-    const keyValuePair = bucket.at(keyIndex);
-    return keyValuePair.value[1];
+    const keyValuePairNode = bucket.at(keyIndex);
+    return keyValuePairNode.value[1];
   };
 
   const has = (key) => {
     // returns true if the given key is in the hash map
-    if (hashMapArray[hash(key)].containsKey(key)) {
-      return true;
-    } else return false;
+    if (hashMapArray[hash(key)] !== undefined) {
+      if (hashMapArray[hash(key)].containsKey(key)) return true;
+    }
+    return false;
   };
 
   return { hash, set, get, has, hashMapArray };
@@ -70,12 +72,14 @@ exampleHashMap.set("dad", "fred");
 console.log(exampleHashMap.get("dad"));
 exampleHashMap.set("dad", "frank");
 console.log(exampleHashMap.get("dad"));
+console.log(exampleHashMap.get("sadfsgagg"));
 exampleHashMap.set("add", "5+5");
 console.log(exampleHashMap.hashMapArray[297].head.value);
 console.log(exampleHashMap.hashMapArray[297].head.next.value);
 console.log(exampleHashMap.has("dad"));
 console.log(exampleHashMap.has("add"));
 console.log(exampleHashMap.has("dda"));
+console.log(exampleHashMap.has("aushdfuishdf"));
 
 /*
 const Node1 = linkedList.Node(5);
