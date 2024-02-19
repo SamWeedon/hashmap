@@ -4,23 +4,25 @@ const linkedList = require("./linkedList.cjs");
 
 const HashMap = () => {
   let hashMapArray = [];
+  let capacity = 16;
   const hash = (key) => {
-    /*
     let hashCode = 0;
 
     const primeNumber = 31;
     for (let i = 0; i < key.length; i++) {
       hashCode = primeNumber * hashCode + key.charCodeAt(i);
+      hashCode = hashCode % capacity;
     }
     return hashCode;
-    */
 
+    /*
     // for testing collisions ONLY
     let hashCode = 0;
     for (let i = 0; i < key.length; i++) {
       hashCode = hashCode + key.charCodeAt(i);
     }
     return hashCode;
+    */
   };
 
   const set = (key, value) => {
@@ -74,8 +76,8 @@ exampleHashMap.set("dad", "frank");
 console.log(exampleHashMap.get("dad"));
 console.log(exampleHashMap.get("sadfsgagg"));
 exampleHashMap.set("add", "5+5");
-console.log(exampleHashMap.hashMapArray[297].head.value);
-console.log(exampleHashMap.hashMapArray[297].head.next.value);
+//console.log(exampleHashMap.hashMapArray[297].head.value);
+//console.log(exampleHashMap.hashMapArray[297].head.next.value);
 console.log(exampleHashMap.has("dad"));
 console.log(exampleHashMap.has("add"));
 console.log(exampleHashMap.has("dda"));
