@@ -21,7 +21,7 @@ const LinkedList = (head = null) => {
       counter++;
       currentNode = currentNode.next;
     }
-    return `Size: ${counter}`;
+    return counter;
   };
 
   const getTail = function () {

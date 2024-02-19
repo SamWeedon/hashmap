@@ -70,7 +70,18 @@ const HashMap = () => {
     hashMapArray[hashedKey].removeAt(keyIndex);
   };
 
-  return { hash, set, get, has, remove, hashMapArray };
+  const length = function () {
+    let storedKeys = 0;
+    for (let i = 0; i < hashMapArray.length; i++) {
+      if (hashMapArray[i] !== undefined) {
+        let bucketLength = hashMapArray[i].size();
+        storedKeys += bucketLength;
+      }
+    }
+    return storedKeys;
+  };
+
+  return { hash, set, get, has, remove, length, hashMapArray };
 };
 
 // testing
@@ -91,6 +102,7 @@ console.log(exampleHashMap.has("dda"));
 console.log(exampleHashMap.has("aushdfuishdf"));
 exampleHashMap.remove("add");
 console.log(exampleHashMap.has("add"));
+console.log(exampleHashMap.length());
 /*
 const Node1 = linkedList.Node(5);
 const exampleList = linkedList.LinkedList(Node1);
