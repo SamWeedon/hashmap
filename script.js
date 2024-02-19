@@ -63,7 +63,14 @@ const HashMap = () => {
     return false;
   };
 
-  return { hash, set, get, has, hashMapArray };
+  const remove = function (key) {
+    if (!this.has(key)) return false;
+    const hashedKey = hash(key);
+    const keyIndex = hashMapArray[hashedKey].findKey(key);
+    hashMapArray[hashedKey].removeAt(keyIndex);
+  };
+
+  return { hash, set, get, has, remove, hashMapArray };
 };
 
 // testing
@@ -82,7 +89,8 @@ console.log(exampleHashMap.has("dad"));
 console.log(exampleHashMap.has("add"));
 console.log(exampleHashMap.has("dda"));
 console.log(exampleHashMap.has("aushdfuishdf"));
-
+exampleHashMap.remove("add");
+console.log(exampleHashMap.has("add"));
 /*
 const Node1 = linkedList.Node(5);
 const exampleList = linkedList.LinkedList(Node1);
