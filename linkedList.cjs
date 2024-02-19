@@ -121,6 +121,26 @@ const LinkedList = (head = null) => {
     }
   };
 
+  const containsKey = function (target) {
+    let currentNode = this.head;
+    while (currentNode) {
+      if (currentNode.value[0] == target) return true;
+      currentNode = currentNode.next;
+    }
+    return false;
+  };
+
+  const findKey = function (target) {
+    let currentNode = this.head;
+    let index = 0;
+    while (currentNode) {
+      if (currentNode.value[0] === target) return index;
+      currentNode = currentNode.next;
+      index++;
+    }
+    return null;
+  };
+
   return {
     head: head,
     prepend,
@@ -134,6 +154,8 @@ const LinkedList = (head = null) => {
     toString,
     insertAt,
     removeAt,
+    containsKey,
+    findKey,
   };
 };
 
