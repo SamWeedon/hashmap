@@ -5,6 +5,25 @@ const linkedList = require("./linkedList.cjs");
 const HashMap = () => {
   let hashMapArray = [];
   let capacity = 16;
+  const loadFactor = 0.75;
+
+  const growBuckets = function () {
+    let occupiedBuckets = 0;
+    for (let bucket of hashMapArray) {
+      if (bucket !== undefined) {
+        occupiedBuckets++;
+      }
+    }
+    if (occupiedBuckets >= capacity * loadFactor) {
+      capacity *= 2;
+      let keyValueArray = this.entries();
+      this.clear();
+      for (let keyValuePair of keyValueArray) {
+        this.set(keyValuePair[0], keyValuePair[1]);
+      }
+    }
+  };
+
   const hash = (key) => {
     let hashCode = 0;
 
@@ -25,11 +44,12 @@ const HashMap = () => {
     */
   };
 
-  const set = (key, value) => {
+  const set = function (key, value) {
     // in the case of a pre-existing key, the value should be overwritten,
     // but in the case of a collision, where the bucket (hash code index)
     // is the same, but the key is different, the key value pair must be
     // appended to the linked list
+
     const hashedKey = hash(key);
     if (hashMapArray[hashedKey] === undefined) {
       // create bucket in the form of a linked list
@@ -44,6 +64,7 @@ const HashMap = () => {
       // append the key value pair to the linked list (bucket)
       hashMapArray[hashedKey].append([key, value]);
     }
+    this.growBuckets();
   };
 
   const get = function (key) {
@@ -134,6 +155,7 @@ const HashMap = () => {
     keys,
     values,
     entries,
+    growBuckets,
     hashMapArray,
   };
 };
@@ -161,6 +183,25 @@ exampleHashMap.set("add", "5+5");
 console.log(exampleHashMap.keys());
 console.log(exampleHashMap.values());
 console.log(exampleHashMap.entries()[0], exampleHashMap.entries()[1]);
+exampleHashMap.set("dasdf", "sadasfasdf");
+exampleHashMap.set("zcxvzcxv", "sabfagbsf");
+exampleHashMap.set("savfgasg", "asdgasfgwer");
+exampleHashMap.set("argreawf", "regijaiuhg");
+exampleHashMap.set("aiohfuibweif", "nioasbfuiba");
+exampleHashMap.set("opjiwoehfioh", "ihwaeiufbwauf");
+exampleHashMap.set("ionuiafyuaf", "woajfubwehbfywa");
+exampleHashMap.set("weiuefu", "pouiyuit");
+exampleHashMap.set("iuadsyfyasdf", "opjweihfbha");
+exampleHashMap.set("okasifbwevbf", "pouiwayefwea");
+exampleHashMap.set("lknweabfyugwaef", "poijasufyugayufwe");
+exampleHashMap.set("ajifihsuiafhuher", "fopajwifhuiwqrfuiahef");
+exampleHashMap.set("fwaefijiuqewahqfuiheq", "weafoojierhguierug");
+exampleHashMap.set("fawefjiuwhrgfwer", "wafnuiafuihasrf");
+exampleHashMap.set("asfjwiahefuihewryhf", "ijeasfuihuawfh");
+exampleHashMap.set("safsiojgudhgyfesyeufh", "asf;jwiuhfuygwrygfhaijfe");
+for (let key of exampleHashMap.keys()) {
+  console.log(exampleHashMap.hash(key));
+}
 /*
 const Node1 = linkedList.Node(5);
 const exampleList = linkedList.LinkedList(Node1);
