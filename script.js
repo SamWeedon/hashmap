@@ -103,7 +103,28 @@ const HashMap = () => {
     return keysArray;
   };
 
-  return { hash, set, get, has, remove, length, clear, keys, hashMapArray };
+  const values = function () {
+    let valuesArray = [];
+    const keysArray = this.keys();
+    for (let key of keysArray) {
+      let value = this.get(key);
+      valuesArray.push(value);
+    }
+    return valuesArray;
+  };
+
+  return {
+    hash,
+    set,
+    get,
+    has,
+    remove,
+    length,
+    clear,
+    keys,
+    values,
+    hashMapArray,
+  };
 };
 
 // testing
@@ -127,6 +148,7 @@ console.log(exampleHashMap.has("add"));
 console.log(exampleHashMap.length());
 exampleHashMap.set("add", "5+5");
 console.log(exampleHashMap.keys());
+console.log(exampleHashMap.values());
 /*
 const Node1 = linkedList.Node(5);
 const exampleList = linkedList.LinkedList(Node1);
