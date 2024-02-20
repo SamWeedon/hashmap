@@ -68,6 +68,10 @@ const HashMap = () => {
     const hashedKey = hash(key);
     const keyIndex = hashMapArray[hashedKey].findKey(key);
     hashMapArray[hashedKey].removeAt(keyIndex);
+    // if that was the last item in the linked list, clear the index in the hash map
+    if (hashMapArray[hashedKey].head === null) {
+      hashMapArray[hashedKey] = undefined;
+    }
   };
 
   const length = function () {
@@ -81,7 +85,25 @@ const HashMap = () => {
     return storedKeys;
   };
 
-  return { hash, set, get, has, remove, length, hashMapArray };
+  const clear = function () {
+    hashMapArray = [];
+  };
+
+  const keys = function () {
+    let keysArray = [];
+    for (let i = 0; i < hashMapArray.length; i++) {
+      if (hashMapArray[i] !== undefined) {
+        let currentNode = hashMapArray[i].head;
+        while (currentNode) {
+          keysArray.push(currentNode.value[0]);
+          currentNode = currentNode.next;
+        }
+      }
+    }
+    return keysArray;
+  };
+
+  return { hash, set, get, has, remove, length, clear, keys, hashMapArray };
 };
 
 // testing
@@ -103,6 +125,8 @@ console.log(exampleHashMap.has("aushdfuishdf"));
 exampleHashMap.remove("add");
 console.log(exampleHashMap.has("add"));
 console.log(exampleHashMap.length());
+exampleHashMap.set("add", "5+5");
+console.log(exampleHashMap.keys());
 /*
 const Node1 = linkedList.Node(5);
 const exampleList = linkedList.LinkedList(Node1);
